@@ -17,5 +17,9 @@ namespace DataTypesHierarchy_VP_CourseWork
             InitializeComponent();
         }
 
+        private void btnAddDataType_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
