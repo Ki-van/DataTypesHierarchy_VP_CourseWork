@@ -9,7 +9,7 @@ namespace DataTypesHierarchy_VP_CourseWork
 
     public class DataType : IDescribable
     {
-        protected string name;
+        private string name;
         protected uint size;
         public string Name { get => name;  
             set
@@ -33,7 +33,7 @@ namespace DataTypesHierarchy_VP_CourseWork
     public class Scalar<T> : DataType
     {
         private T value;
-
+        public virtual T Value{ get => value; set { } }
         public override string GetDescription()
         {
             return Resource.ScalarTypeDescription;
@@ -76,7 +76,7 @@ namespace DataTypesHierarchy_VP_CourseWork
         }
     }
 
-    public unsafe class DependentScalar<T> : Scalar<T>, ITypeSafety
+    public unsafe class DependentScalar<T> : Scalar<T>
     {
         public DataType pointerType;
 

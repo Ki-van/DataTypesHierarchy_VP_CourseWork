@@ -19,7 +19,17 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         private void btnAddDataType_Click(object sender, EventArgs e)
         {
+            FormDataTypeChooser formDataTypeChooser = new FormDataTypeChooser
+            {
+                Owner = this,
+                StartPosition = FormStartPosition.CenterParent
+            };
+            formDataTypeChooser.ShowDialog();
+        }
 
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            hierarchyTreeView.ExpandAll();
         }
     }
 }

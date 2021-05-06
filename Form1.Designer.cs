@@ -91,6 +91,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.Controls.Add(this.hierarchyTreeView);
             this.Name = "Form1";
             this.Text = "Data types hierarchy";
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
