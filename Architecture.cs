@@ -57,15 +57,37 @@ namespace DataTypesHierarchy_VP_CourseWork
     }
  
 
-    public class Aggregate : DataType
+    public class AggregateType : DataType
     {
-        ///TODO Конструкторы, методы сравнения по размеру 
-        public List<DataType> components;
+        private List<DataType> components;
+        public List<DataType> Components { get => components;
+            set 
+            {
+                components = value;
+                CalcSize(value);
+            }
+        }
+
+        public AggregateType(string name, List<DataType> components)
+        {
+            Name = name;
+            Components = components;
+        }
 
         public override string GetDescription()
         {
-            throw new NotImplementedException();
+            return "Агрегратный ебана";
         }
+
+        private void CalcSize(List<DataType> dataTypes)
+        {
+            uint size = 1;
+            foreach (var type in dataTypes)
+                size += type.Size;
+
+            Size = size;
+        }
+
     }
 
     public class IndependentScalar<T> : Scalar<T>
@@ -96,7 +118,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             PointerType = pointerType;
             Value = pointedTo;
             Name = name;
-            
+            Size = 4;
         }
 
         public override string GetDescription()

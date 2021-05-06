@@ -38,11 +38,20 @@ namespace DataTypesHierarchy_VP_CourseWork
                     Owner = this,
                     StartPosition = FormStartPosition.CenterParent
                 };
-                formDepDataTypeConsructor.Show();
+                formDepDataTypeConsructor.ShowDialog();
+                if (formDepDataTypeConsructor.DialogResult == DialogResult.OK)
+                    Close();
             }
             else if (rbtnAggregate.Checked)
             {
-
+                FormAggregateDataTypeConstructor formAggregateDataTypeConstructor = new()
+                {
+                    Owner = this,
+                    StartPosition = FormStartPosition.CenterParent
+                };
+                formAggregateDataTypeConstructor.ShowDialog();
+                if (formAggregateDataTypeConstructor.DialogResult == DialogResult.OK)
+                    Close();
             }
         }
     }
