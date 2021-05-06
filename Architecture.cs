@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DataTypesHierarchy_VP_CourseWork
 {
 
-    public class DataType : IDescribable
+    public unsafe class DataType : IDescribable
     {
         private string name;
         protected uint size;
@@ -32,7 +32,7 @@ namespace DataTypesHierarchy_VP_CourseWork
     }
     public class Scalar<T> : DataType
     {
-        private T value;
+        private  T value;
         public virtual T Value{ get => value; set { this.value = value; } }
         public override string GetDescription()
         {
@@ -76,22 +76,44 @@ namespace DataTypesHierarchy_VP_CourseWork
         }
     }
 
-    public unsafe class DependentScalar<T> : Scalar<T>
+    public unsafe class DependentScalar : Scalar<DataType>
     {
-        public DataType pointerType;
+        public Type PointerType { get; set; }
 
-        public List<DataType> exemplars;
+        public override DataType Value { get => base.Value; 
+            set 
+            {
+                if (IsValueFitType(value))
+                {
+                    base.Value = value;
+                }
+                else
+                    throw new Exception("Значение не соотвествует типу");
+            }
+        }
+        public DependentScalar(string name, Type pointerType, DataType pointedTo ) 
+        {
+            PointerType = pointerType;
+            Value = pointedTo;
+            Name = name;
+            
+        }
 
         public override string GetDescription()
         {
-            throw new NotImplementedException();
+            return "Указатель хуле";
         }
 
-        public  bool IsValueFitType<T>(T value)
+        public  bool IsValueFitType(DataType value)
         {
-            throw new NotImplementedException();
+            if (value.GetType() == PointerType)
+                return true;
+            
+           return false;
         }
+
     }
+
 
 
 }

@@ -33,7 +33,12 @@ namespace DataTypesHierarchy_VP_CourseWork
             }
             else if (rbtnDependent.Checked)
             {
-
+                FormDepDataTypeConsructor formDepDataTypeConsructor = new()
+                {
+                    Owner = this,
+                    StartPosition = FormStartPosition.CenterParent
+                };
+                formDepDataTypeConsructor.Show();
             }
             else if (rbtnAggregate.Checked)
             {
