@@ -24,7 +24,7 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         private void btnCreateScalar_Click(object sender, EventArgs e)
         {
-            if (tbTypeName.Text == "" || tbTypeValue.Text == "")
+            if (tbTypeName.Text == "" || (tbTypeValue.Text == "" && !rbtnScalarBoolean.Checked))
             {
                 MessageBox.Show("Заполните пустые поля", "Неточность", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -98,8 +98,8 @@ namespace DataTypesHierarchy_VP_CourseWork
             {
                 try
                 {
-                    Boolean boolean = new Boolean(tbTypeName.Text, tbTypeValue.Text);
-                    DataTypes.dataTypes.Add(character);
+                    Boolean boolean = new Boolean(tbTypeName.Text, (cbBooleanValue.SelectedItem.ToString() == "true")?true:false);
+                    DataTypes.dataTypes.Add(boolean);
                     DialogResult = DialogResult.OK;
                     Close();
                 }
@@ -118,7 +118,7 @@ namespace DataTypesHierarchy_VP_CourseWork
         {
             grbNumberWholeParams.Visible = false;
             rbtnRealSize4.Checked = true;
-         
+            cbBooleanValue.SelectedIndex = 0;
         }
 
         private void rbtnRealNumber_CheckedChanged(object sender, EventArgs e)
@@ -150,6 +150,20 @@ namespace DataTypesHierarchy_VP_CourseWork
                 grbNumberClass.Visible = false;
                 grbNumberWholeParams.Visible = false;
                 grbRealTypeParams.Visible = false;
+            }
+        }
+
+        private void rbtnScalarBoolean_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtnScalarBoolean.Checked)
+            {
+                cbBooleanValue.Visible = true;
+                tbTypeValue.Visible = false;
+            }
+            else
+            {
+                cbBooleanValue.Visible = false;
+                tbTypeValue.Visible = true;
             }
         }
     }

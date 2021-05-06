@@ -25,6 +25,17 @@ namespace DataTypesHierarchy_VP_CourseWork
                 StartPosition = FormStartPosition.CenterParent
             };
             formDataTypeChooser.ShowDialog();
+            if(formDataTypeChooser.DialogResult == DialogResult.OK)
+            {
+                BuildTreeView();
+                hierarchyTreeView.Refresh();
+            }
+        }
+
+        private void BuildTreeView()
+        {
+            hierarchyTreeView.Nodes.Clear();
+
         }
 
         private void Form1_Shown(object sender, EventArgs e)

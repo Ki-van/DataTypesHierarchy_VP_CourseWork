@@ -83,6 +83,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.rbtnScalarBoolean.TabIndex = 2;
             this.rbtnScalarBoolean.Text = "Логическое значение";
             this.rbtnScalarBoolean.UseVisualStyleBackColor = true;
+            this.rbtnScalarBoolean.CheckedChanged += new System.EventHandler(this.rbtnScalarBoolean_CheckedChanged);
             // 
             // rbtnScalarCharacter
             // 
@@ -321,10 +322,11 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.cbBooleanValue.Items.AddRange(new object[] {
             "true",
             "false"});
-            this.cbBooleanValue.Location = new System.Drawing.Point(239, 322);
+            this.cbBooleanValue.Location = new System.Drawing.Point(13, 366);
             this.cbBooleanValue.Name = "cbBooleanValue";
-            this.cbBooleanValue.Size = new System.Drawing.Size(121, 23);
+            this.cbBooleanValue.Size = new System.Drawing.Size(200, 23);
             this.cbBooleanValue.TabIndex = 6;
+            this.cbBooleanValue.Visible = false;
             // 
             // FormInDepDataTypeConsructor
             // 

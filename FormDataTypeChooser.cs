@@ -28,7 +28,8 @@ namespace DataTypesHierarchy_VP_CourseWork
                     StartPosition = FormStartPosition.CenterParent
                 };
                 formInDepDataTypeConsructor.ShowDialog();
-
+                if (formInDepDataTypeConsructor.DialogResult == DialogResult.OK)
+                    Close();
             }
             else if (rbtnDependent.Checked)
             {

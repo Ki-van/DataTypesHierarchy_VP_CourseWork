@@ -33,7 +33,7 @@ namespace DataTypesHierarchy_VP_CourseWork
     public class Scalar<T> : DataType
     {
         private T value;
-        public virtual T Value{ get => value; set { } }
+        public virtual T Value{ get => value; set { this.value = value; } }
         public override string GetDescription()
         {
             return Resource.ScalarTypeDescription;
