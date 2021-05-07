@@ -29,37 +29,42 @@ namespace DataTypesHierarchy_VP_CourseWork
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Аггрегатный");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Зависимый");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Независимый");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Скалярный", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Тип данных", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode9});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Аггрегатный");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Зависимый");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Независимый");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Скалярный", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Тип данных", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode4});
             this.hierarchyTreeView = new System.Windows.Forms.TreeView();
             this.btnAddDataType = new System.Windows.Forms.Button();
             this.Свойства = new System.Windows.Forms.Label();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // hierarchyTreeView
             // 
-            this.hierarchyTreeView.Location = new System.Drawing.Point(13, 13);
+            this.hierarchyTreeView.Location = new System.Drawing.Point(13, 41);
             this.hierarchyTreeView.Name = "hierarchyTreeView";
-            treeNode6.Name = "Aggregate";
-            treeNode6.Text = "Аггрегатный";
-            treeNode7.Name = "Dependent";
-            treeNode7.Text = "Зависимый";
-            treeNode8.Name = "Independent";
-            treeNode8.Text = "Независимый";
-            treeNode9.Name = "Scalar";
-            treeNode9.Text = "Скалярный";
-            treeNode10.Name = "RootDataType";
-            treeNode10.Text = "Тип данных";
+            treeNode1.Name = "Aggregate";
+            treeNode1.Text = "Аггрегатный";
+            treeNode2.Name = "Dependent";
+            treeNode2.Text = "Зависимый";
+            treeNode3.Name = "Independent";
+            treeNode3.Text = "Независимый";
+            treeNode4.Name = "Scalar";
+            treeNode4.Text = "Скалярный";
+            treeNode5.Name = "RootDataType";
+            treeNode5.Text = "Тип данных";
             this.hierarchyTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
-            this.hierarchyTreeView.Size = new System.Drawing.Size(510, 602);
+            treeNode5});
+            this.hierarchyTreeView.Size = new System.Drawing.Size(510, 574);
             this.hierarchyTreeView.TabIndex = 0;
             // 
             // btnAddDataType
@@ -81,6 +86,40 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.Свойства.TabIndex = 2;
             this.Свойства.Text = "label1";
             // 
+            // menuStrip
+            // 
+            this.menuStrip.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemFile});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1004, 24);
+            this.menuStrip.TabIndex = 3;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // toolStripMenuItemFile
+            // 
+            this.toolStripMenuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemOpen,
+            this.toolStripMenuItemSave});
+            this.toolStripMenuItemFile.Name = "toolStripMenuItemFile";
+            this.toolStripMenuItemFile.Size = new System.Drawing.Size(48, 20);
+            this.toolStripMenuItemFile.Text = "Файл";
+            // 
+            // toolStripMenuItemOpen
+            // 
+            this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
+            this.toolStripMenuItemOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemOpen.Text = "Открыть";
+            // 
+            // toolStripMenuItemSave
+            // 
+            this.toolStripMenuItemSave.Name = "toolStripMenuItemSave";
+            this.toolStripMenuItemSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.toolStripMenuItemSave.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItemSave.Text = "Сохранить";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -89,9 +128,13 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.Controls.Add(this.Свойства);
             this.Controls.Add(this.btnAddDataType);
             this.Controls.Add(this.hierarchyTreeView);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "Form1";
             this.Text = "Data types hierarchy";
             this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,6 +145,10 @@ namespace DataTypesHierarchy_VP_CourseWork
         private System.Windows.Forms.TreeView hierarchyTreeView;
         private System.Windows.Forms.Button btnAddDataType;
         private System.Windows.Forms.Label Свойства;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFile;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSave;
     }
 }
 

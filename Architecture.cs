@@ -165,6 +165,12 @@ namespace DataTypesHierarchy_VP_CourseWork
             if (links.ContainsKey(dataType))
             {
                 xNode = links[dataType];
+                if (xNode.HasElements)
+                {
+                    xRoot.Add(xNode);
+                    return;
+                }
+                    
             }
             else
             {
@@ -224,6 +230,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             }
             else if (typeDataType == typeof(DependentScalar))
             {
+                ulong actualId = id;
                 DependentScalar dependentScalar = (DependentScalar)dataType;
                 xNode.Name = "DependentScalar";
                 xNode.Add(
@@ -232,16 +239,21 @@ namespace DataTypesHierarchy_VP_CourseWork
                     );
                 xRoot.Add(xNode);
                 
-                if(links.ContainsKey(dataType))
+                if(links.ContainsKey(dependentScalar.Value))
                 {
-                    links[dataType].Add(new XAttribute("id", id));
+                    if(links[dependentScalar.Value].Attribute("id") != null)
+                    {
+                        actualId = ulong.Parse(links[dependentScalar.Value].Attribute("id").Value);
+                        id--;
+                    } else 
+                        links[dependentScalar.Value].Add(new XAttribute("id", id));
                 }
                 else
                 {
-                    links.Add(dataType, new XElement("Name", new XAttribute("id", id)));
+                    links.Add(dependentScalar.Value, new XElement("Name", new XAttribute("id", id)));
                 }
 
-                xNode.Add(new XElement("Value", id));
+                xNode.Add(new XElement("Value", actualId));
                 id++;
             }
             else
@@ -251,6 +263,9 @@ namespace DataTypesHierarchy_VP_CourseWork
         public static void LoadFromXml(string path)
         {
             DataTypes.dataTypes.Clear();
+            unresolvedPointers.Clear();
+            pointedOns.Clear();
+
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(path);
 
@@ -262,6 +277,17 @@ namespace DataTypesHierarchy_VP_CourseWork
                 {
                     DataTypes.dataTypes.Add(DeserializeNode(xNode));
                 }
+
+                foreach(ulong key in unresolvedPointers.Keys)
+                {
+                    if (pointedOns.ContainsKey(key))
+                    {
+                        ((DependentScalar)unresolvedPointers[key]).Value = pointedOns[key];
+                    }
+                    else
+                        throw new Exception("Ошибка десериализации, возможно файл поврежден");
+                }
+                
             }
         }
 
@@ -410,7 +436,7 @@ namespace DataTypesHierarchy_VP_CourseWork
                 dataType = new DependentScalar(name, pointerType, value);
             }
 
-            if (xNode.HasAttribute("id"))
+            if (xNode.HasAttribute("id") && !pointedOns.ContainsKey(uint.Parse(xNode.GetAttribute("id"))))
             {
                 pointedOns.Add(uint.Parse(xNode.GetAttribute("id")), dataType);
             }
