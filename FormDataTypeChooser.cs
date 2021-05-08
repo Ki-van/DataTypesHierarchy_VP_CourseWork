@@ -64,5 +64,21 @@ namespace DataTypesHierarchy_VP_CourseWork
                 }
             }
         }
+
+        private void btnCloneType_Click(object sender, EventArgs e)
+        {
+            FormCloneType formCloneType = new()
+            {
+                Owner = this,
+                StartPosition = FormStartPosition.CenterParent
+            };
+
+            formCloneType.ShowDialog();
+            if(formCloneType.DialogResult == DialogResult.OK)
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
     }
 }

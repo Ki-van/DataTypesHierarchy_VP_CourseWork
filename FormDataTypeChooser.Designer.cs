@@ -101,6 +101,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.btnCloneType.TabIndex = 2;
             this.btnCloneType.Text = "Клонировать";
             this.btnCloneType.UseVisualStyleBackColor = true;
+            this.btnCloneType.Click += new System.EventHandler(this.btnCloneType_Click);
             // 
             // FormDataTypeChooser
             // 

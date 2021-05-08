@@ -10,7 +10,7 @@ using System.Xml.Linq;
 namespace DataTypesHierarchy_VP_CourseWork
 {
 
-    public unsafe class DataType : IDescribable
+    public unsafe class DataType : IDescribable, ICloneable
     {
         private string name;
         protected uint size;
@@ -31,7 +31,11 @@ namespace DataTypesHierarchy_VP_CourseWork
         {
             return Resource.DataTypeDescription;
         }
-        
+
+        public virtual object Clone()
+        {
+            return new DataType();    
+        }
     }
     public class Scalar<T> : DataType
     {
@@ -41,6 +45,8 @@ namespace DataTypesHierarchy_VP_CourseWork
         {
             return Resource.ScalarTypeDescription;
         }
+
+        
     }
 
     public static class DataTypes
@@ -91,6 +97,14 @@ namespace DataTypesHierarchy_VP_CourseWork
             Size = size;
         }
 
+        public override object Clone()
+        {
+            List<DataType> clonedComp = new();
+            foreach (DataType component in components)
+                clonedComp.Add((DataType)component.Clone());
+            return new AggregateType("Cloned_" + Name, clonedComp);
+        }
+
     }
 
     public class IndependentScalar<T> : Scalar<T>
@@ -104,7 +118,6 @@ namespace DataTypesHierarchy_VP_CourseWork
     public unsafe class DependentScalar : Scalar<DataType>
     {
         public Type PointerType { get; set; }
-
         public override DataType Value { get => base.Value; 
             set 
             {
@@ -148,7 +161,10 @@ namespace DataTypesHierarchy_VP_CourseWork
             
            return false;
         }
-
+        public override object Clone()
+        {
+            return new DependentScalar("Cloned_" + Name, PointerType, Value);
+        }
     }
 
     public static class Serialize

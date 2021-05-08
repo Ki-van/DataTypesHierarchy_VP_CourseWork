@@ -164,7 +164,11 @@ namespace DataTypesHierarchy_VP_CourseWork
             return result;
         }
 
-       
+        public override object Clone()
+        {
+            return new Number(signed, real, Size,"Cloned_"+Name, Value);
+        }
+
     }
 
     public class Character : IndependentScalar<char>
@@ -181,6 +185,11 @@ namespace DataTypesHierarchy_VP_CourseWork
         {
             return String.Format("Символ" + "\r\n" + "Имя: {0} \r\nРазмер: {1} байт\r\nЗначение: {2}\r\nПринимает значения От U+0000 до U+FFFF\r\n " +
                 "\r\nДопустимые операции: сравнение, проверку равенства, а также операции инкремента и декремента.", Name, Size, Value);
+        }
+
+        public override object Clone()
+        {
+            return new Character("Cloned_" + Name, Value);
         }
     }
 
@@ -199,6 +208,10 @@ namespace DataTypesHierarchy_VP_CourseWork
                 "Для выполнения логических операций со значениями типа bool используйте логические операторы. Тип bool является типом " +
                 "результата операторов сравнения и равенства. Выражение bool может быть управляющим условным выражением в операторах " +
                 "if, do, while и for и условном операторе ?:.", Name, Size, Value);
+        }
+        public override object Clone()
+        {
+            return new Boolean("Cloned_" + Name, Value);
         }
     }
 }

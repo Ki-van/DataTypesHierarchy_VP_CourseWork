@@ -41,7 +41,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             TreeNode rootNode = new TreeNode("Тип данных");
             rootNode.Tag = new DataType();
             hierarchyTreeView.Nodes.Add(rootNode);
-            TreeNode aggregatesNode = new TreeNode("Аггрегатный");
+            TreeNode aggregatesNode = new TreeNode("Агрегатный");
             TreeNode scalarsNode = new TreeNode("Скалярный");
             
             TreeNode depsNode = new TreeNode("Зависимый");
@@ -163,6 +163,12 @@ namespace DataTypesHierarchy_VP_CourseWork
         private void hierarchyTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {    
             tbTypeDescription.Text = ((DataType)(e.Node.Tag))?.GetDescription();
+        }
+
+        private void btnDeleteType_Click(object sender, EventArgs e)
+        {
+            DataTypes.dataTypes.Remove((DataType)hierarchyTreeView.SelectedNode.Tag);
+            BuildTreeView();
         }
     }
 }
