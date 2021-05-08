@@ -19,7 +19,7 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         private void btnCreateType_Click(object sender, EventArgs e)
         {
-            
+
             if (rbtnInDependent.Checked)
             {
                 FormInDepDataTypeConsructor formInDepDataTypeConsructor = new()
@@ -29,7 +29,11 @@ namespace DataTypesHierarchy_VP_CourseWork
                 };
                 formInDepDataTypeConsructor.ShowDialog();
                 if (formInDepDataTypeConsructor.DialogResult == DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
                     Close();
+
+                }
             }
             else if (rbtnDependent.Checked)
             {
@@ -40,7 +44,10 @@ namespace DataTypesHierarchy_VP_CourseWork
                 };
                 formDepDataTypeConsructor.ShowDialog();
                 if (formDepDataTypeConsructor.DialogResult == DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
                     Close();
+                }
             }
             else if (rbtnAggregate.Checked)
             {
@@ -51,7 +58,10 @@ namespace DataTypesHierarchy_VP_CourseWork
                 };
                 formAggregateDataTypeConstructor.ShowDialog();
                 if (formAggregateDataTypeConstructor.DialogResult == DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
                     Close();
+                }
             }
         }
     }

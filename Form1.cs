@@ -30,7 +30,6 @@ namespace DataTypesHierarchy_VP_CourseWork
             if(formDataTypeChooser.DialogResult == DialogResult.OK)
             {
                 BuildTreeView();
-                hierarchyTreeView.Refresh();
             }
         }
 
@@ -38,7 +37,84 @@ namespace DataTypesHierarchy_VP_CourseWork
         {
             hierarchyTreeView.Nodes.Clear();
 
+            TreeNode rootNode = new TreeNode("Тип данных");
+            hierarchyTreeView.Nodes.Add(rootNode);
+            TreeNode aggregatesNode = new TreeNode("Аггрегатный");
+            TreeNode scalarsNode = new TreeNode("Скалярный");
+            TreeNode depsNode = new TreeNode("Зависимый");
+            TreeNode inDepsNode = new TreeNode("Независимый");
+
+            rootNode.Nodes.AddRange(new TreeNode[] { aggregatesNode, scalarsNode });
+            scalarsNode.Nodes.Add(depsNode);
+            scalarsNode.Nodes.Add(inDepsNode);
+
+            foreach(DataType dataType in DataTypes.dataTypes)
+            {
+                Type typeType = dataType.GetType();
+                if(typeType == typeof(DependentScalar))
+                {
+                    AddTreeNode(dataType, depsNode);
+                } else if(typeType == typeof(AggregateType))
+                {
+                    AddTreeNode(dataType, aggregatesNode);
+                } else
+                {
+                    AddTreeNode(dataType, inDepsNode);
+                }
+            }
+            hierarchyTreeView.Nodes[0].ExpandAll();
+            hierarchyTreeView.Refresh();
         }
+
+        private void AddTreeNode(DataType dataType, TreeNode rootNode)
+        {
+            Type typeType = dataType.GetType();
+            if(typeType == typeof(Number))
+            {
+                Number element = (Number)dataType;
+
+                TreeNode newNode = new(element.Name);
+                newNode.Nodes.Add(new TreeNode(element.Value.ToString()));
+                newNode.Tag = dataType;
+                rootNode.Nodes.Add(newNode);
+            } else if(typeType == typeof(Character))
+            {
+                Character element = (Character)dataType;
+
+                TreeNode newNode = new(element.Name);
+                newNode.Nodes.Add(new TreeNode(element.Value.ToString()));
+                newNode.Tag = dataType;
+                rootNode.Nodes.Add(newNode);
+            } else if(typeType == typeof(Boolean))
+            {
+                Boolean element = (Boolean)dataType;
+
+                TreeNode newNode = new(element.Name);
+                newNode.Nodes.Add(new TreeNode(element.Value.ToString()));
+                newNode.Tag = dataType;
+                rootNode.Nodes.Add(newNode);
+            } else if(typeType == typeof(AggregateType))
+            {
+                AggregateType element = (AggregateType)dataType;
+
+                TreeNode newNode = new(element.Name);
+                newNode.Tag = dataType;
+                
+                foreach(DataType component in element.Components)
+                {
+                    AddTreeNode(component, newNode);
+                }
+                rootNode.Nodes.Add(newNode);
+            } else if(typeType == typeof(DependentScalar))
+            {
+                DependentScalar element = (DependentScalar)dataType;
+
+                TreeNode newNode = new(element.Name);
+                newNode.Tag = dataType;
+                AddTreeNode(element.Value, newNode);
+                rootNode.Nodes.Add(newNode);
+            }
+        } 
 
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -60,12 +136,14 @@ namespace DataTypesHierarchy_VP_CourseWork
                 try
                 {
                     Serialize.LoadFromXml(openFileDialog.FileName);
+                    BuildTreeView();
                 }
                 catch (Exception)
                 {
                     _ = MessageBox.Show("Файл поврежден", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+           
         }
 
         private void MenuItemSave_Click(object sender, EventArgs e)
