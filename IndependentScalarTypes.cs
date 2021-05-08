@@ -56,6 +56,7 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         public Number(bool real, uint size, string name, decimal value):this(false, real, size, name, value) { }
 
+
         public Number(bool signed, bool real, uint size, string name, decimal value)
         {
             Name = name;
@@ -68,7 +69,34 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         public override string GetDescription()
         {
-            return String.Format("Число ебана");
+            if (real)
+            {
+                double minVal;
+                double maxVal;
+                if(Size ==  4)
+                {
+                    minVal = float.MinValue;
+                    maxVal = float.MaxValue;
+                }else
+                {
+                    minVal = double.MinValue;
+                    maxVal = double.MaxValue;
+                }
+                return String.Format("Число с плавающей запятой" + "\r\n\r\n" + "Имя: {0} \r\nРазмер: {1} байт\r\nЗначение: {2}\r\nПринимаемые значение: от {3} до {4}\r\n" +
+                    "Допустимые операции: логические, арифметические\r\n\r\n" +
+                    "Используются для представления вещественных (не обязательно целых) чисел. В этом случае число записывается в" +
+                    " виде x=a*10^b. Где 0<=a<1, а b — некоторое целое число из определённого диапазона. a называют мантиссой, b — порядком." +
+                    " У мантиссы хранятся несколько цифр после запятой, а b — хранится полностью." + 
+                     "\r\n", Name, Size, Value, minVal, maxVal);
+            }
+            else
+            {
+
+                return String.Format("Целочисленный тип" + "\r\n" + "Имя: {0} \r\nРазмер: {1} байт\r\nЗначение: {2}\r\nЗнаковое: {3}\r\n"
+                    + "Допустимые операции:  все целочисленные типы поддерживают арифметические операторы, побитовые логические операторы," +
+                    " операторы сравнения и равенства.\r\n\r\n"
+                    + "Целочисленные типы содержат в себе значения, интерпретируемые как числа (знаковые и беззнаковые).", Name, Size, Value, signed ? "Да" : "Нет");
+            }
         }
 
         private bool IsValueFitType(decimal value)
@@ -151,7 +179,8 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         public override string GetDescription()
         {
-            return "Символ что тут сказать";
+            return String.Format("Символ" + "\r\n" + "Имя: {0} \r\nРазмер: {1} байт\r\nЗначение: {2}\r\nПринимает значения От U+0000 до U+FFFF\r\n " +
+                "\r\nДопустимые операции: сравнение, проверку равенства, а также операции инкремента и декремента.", Name, Size, Value);
         }
     }
 
@@ -166,7 +195,10 @@ namespace DataTypesHierarchy_VP_CourseWork
         public Boolean(string name) : this(name, default(bool)) { }
         public override string GetDescription()
         {
-            return "Булево что тут сказать";
+            return String.Format("Логическое значение" + "\r\n\r\n" + "Имя: {0} \r\nРазмер: {1} байт\r\nЗначение: {2}\r\nПринимает значения true или false\r\n\r\n " +
+                "Для выполнения логических операций со значениями типа bool используйте логические операторы. Тип bool является типом " +
+                "результата операторов сравнения и равенства. Выражение bool может быть управляющим условным выражением в операторах " +
+                "if, do, while и for и условном операторе ?:.", Name, Size, Value);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             InitializeComponent();
             toolStripMenuItemOpen.Click += new System.EventHandler(this.MenuItemOpen_Click);
             toolStripMenuItemSave.Click += new System.EventHandler(this.MenuItemSave_Click);
+            BuildTreeView();
         }
 
         private void btnAddDataType_Click(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             formDataTypeChooser.ShowDialog();
             if(formDataTypeChooser.DialogResult == DialogResult.OK)
             {
-                BuildTreeView();
+              BuildTreeView();
             }
         }
 
@@ -38,9 +39,11 @@ namespace DataTypesHierarchy_VP_CourseWork
             hierarchyTreeView.Nodes.Clear();
 
             TreeNode rootNode = new TreeNode("Тип данных");
+            rootNode.Tag = new DataType();
             hierarchyTreeView.Nodes.Add(rootNode);
             TreeNode aggregatesNode = new TreeNode("Аггрегатный");
             TreeNode scalarsNode = new TreeNode("Скалярный");
+            
             TreeNode depsNode = new TreeNode("Зависимый");
             TreeNode inDepsNode = new TreeNode("Независимый");
 
@@ -155,6 +158,11 @@ namespace DataTypesHierarchy_VP_CourseWork
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 Serialize.SaveToXML(saveFileDialog.FileName);
+        }
+
+        private void hierarchyTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {    
+            tbTypeDescription.Text = ((DataType)(e.Node.Tag))?.GetDescription();
         }
     }
 }

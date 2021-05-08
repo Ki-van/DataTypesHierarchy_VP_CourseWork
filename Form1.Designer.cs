@@ -40,17 +40,19 @@ namespace DataTypesHierarchy_VP_CourseWork
             treeNode4});
             this.hierarchyTreeView = new System.Windows.Forms.TreeView();
             this.btnAddDataType = new System.Windows.Forms.Button();
-            this.Свойства = new System.Windows.Forms.Label();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbTypeDescription = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // hierarchyTreeView
             // 
-            this.hierarchyTreeView.Location = new System.Drawing.Point(13, 41);
+            this.hierarchyTreeView.BackColor = System.Drawing.SystemColors.Control;
+            this.hierarchyTreeView.Location = new System.Drawing.Point(12, 27);
             this.hierarchyTreeView.Name = "hierarchyTreeView";
             treeNode1.Name = "Aggregate";
             treeNode1.Text = "Аггрегатный";
@@ -66,25 +68,17 @@ namespace DataTypesHierarchy_VP_CourseWork
             treeNode5});
             this.hierarchyTreeView.Size = new System.Drawing.Size(510, 574);
             this.hierarchyTreeView.TabIndex = 0;
+            this.hierarchyTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.hierarchyTreeView_AfterSelect);
             // 
             // btnAddDataType
             // 
-            this.btnAddDataType.Location = new System.Drawing.Point(585, 162);
+            this.btnAddDataType.Location = new System.Drawing.Point(550, 578);
             this.btnAddDataType.Name = "btnAddDataType";
             this.btnAddDataType.Size = new System.Drawing.Size(75, 23);
             this.btnAddDataType.TabIndex = 1;
             this.btnAddDataType.Text = "Добавить тип";
             this.btnAddDataType.UseVisualStyleBackColor = true;
             this.btnAddDataType.Click += new System.EventHandler(this.btnAddDataType_Click);
-            // 
-            // Свойства
-            // 
-            this.Свойства.AutoSize = true;
-            this.Свойства.Location = new System.Drawing.Point(598, 41);
-            this.Свойства.Name = "Свойства";
-            this.Свойства.Size = new System.Drawing.Size(38, 15);
-            this.Свойства.TabIndex = 2;
-            this.Свойства.Text = "label1";
             // 
             // menuStrip
             // 
@@ -93,7 +87,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.toolStripMenuItemFile});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1004, 24);
+            this.menuStrip.Size = new System.Drawing.Size(887, 24);
             this.menuStrip.TabIndex = 3;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -120,12 +114,32 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.toolStripMenuItemSave.Size = new System.Drawing.Size(173, 22);
             this.toolStripMenuItemSave.Text = "Сохранить";
             // 
+            // tbTypeDescription
+            // 
+            this.tbTypeDescription.BackColor = System.Drawing.SystemColors.Control;
+            this.tbTypeDescription.Location = new System.Drawing.Point(535, 45);
+            this.tbTypeDescription.Multiline = true;
+            this.tbTypeDescription.Name = "tbTypeDescription";
+            this.tbTypeDescription.ReadOnly = true;
+            this.tbTypeDescription.Size = new System.Drawing.Size(336, 508);
+            this.tbTypeDescription.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(535, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Описание типа";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 627);
-            this.Controls.Add(this.Свойства);
+            this.ClientSize = new System.Drawing.Size(887, 627);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbTypeDescription);
             this.Controls.Add(this.btnAddDataType);
             this.Controls.Add(this.hierarchyTreeView);
             this.Controls.Add(this.menuStrip);
@@ -144,11 +158,12 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         private System.Windows.Forms.TreeView hierarchyTreeView;
         private System.Windows.Forms.Button btnAddDataType;
-        private System.Windows.Forms.Label Свойства;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFile;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpen;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSave;
+        private System.Windows.Forms.TextBox tbTypeDescription;
+        private System.Windows.Forms.Label label1;
     }
 }
 

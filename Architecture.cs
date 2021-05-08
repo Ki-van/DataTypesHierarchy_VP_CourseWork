@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -78,7 +79,7 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         public override string GetDescription()
         {
-            return "Агрегратный ебана";
+            return "Агрегратный тип данных \r\nОбразуется композицией уже существущих";
         }
 
         private void CalcSize(List<DataType> dataTypes)
@@ -123,11 +124,20 @@ namespace DataTypesHierarchy_VP_CourseWork
             Size = 4;
         }
 
-        public override string GetDescription()
+        public unsafe override string GetDescription()
         {
-            return "Указатель хуле";
+            return String.Format("Указатель" + "\r\n\r\n" + "Имя: {0} \r\nРазмер: {1} байт\r\nЗначение: {2}\r\nПринимает значения От {3} до {4}\r\n\r\n " +
+                "Переменная, диапазон значений которой состоит из адресов ячеек памяти или специального значения — нулевого адреса.", Name, Size, Convert.ToString(AddressOf<DataType>(Value).ToInt64(), 16), 
+                Convert.ToString(IntPtr.MinValue.ToInt64(), 16), Convert.ToString(IntPtr.MaxValue.ToInt64(), 16));
         }
 
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        public static System.IntPtr AddressOf<T>(T t)
+        {
+            System.TypedReference reference = __makeref(t);
+
+            return *(System.IntPtr*)(&reference);
+        }
         public  bool IsValueFitType(DataType value)
         {
             if (value == null)
