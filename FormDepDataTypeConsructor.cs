@@ -12,8 +12,11 @@ namespace DataTypesHierarchy_VP_CourseWork
 {
     public partial class FormDepDataTypeConsructor : Form
     {
-        public FormDepDataTypeConsructor()
+        DependentScalar depScal;
+        public FormDepDataTypeConsructor(DataType dataType = null)
         {
+            if (dataType != null)
+                depScal = (DependentScalar)dataType;
             InitializeComponent();
         }
 

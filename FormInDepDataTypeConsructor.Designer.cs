@@ -110,9 +110,9 @@ namespace DataTypesHierarchy_VP_CourseWork
             // 
             // btnCreateScalar
             // 
-            this.btnCreateScalar.Location = new System.Drawing.Point(364, 415);
+            this.btnCreateScalar.Location = new System.Drawing.Point(327, 415);
             this.btnCreateScalar.Name = "btnCreateScalar";
-            this.btnCreateScalar.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateScalar.Size = new System.Drawing.Size(112, 23);
             this.btnCreateScalar.TabIndex = 1;
             this.btnCreateScalar.Text = "Создать";
             this.btnCreateScalar.UseVisualStyleBackColor = true;
@@ -120,9 +120,9 @@ namespace DataTypesHierarchy_VP_CourseWork
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(283, 415);
+            this.btnCancel.Location = new System.Drawing.Point(209, 415);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(112, 23);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;

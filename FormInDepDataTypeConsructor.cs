@@ -12,8 +12,12 @@ namespace DataTypesHierarchy_VP_CourseWork
 {
     public partial class FormInDepDataTypeConsructor : Form
     {
-        public FormInDepDataTypeConsructor()
+        DataType dataType;
+        public FormInDepDataTypeConsructor(DataType pdataType = null)
         {
+            dataType = pdataType;
+           
+
             InitializeComponent();
         }
 
@@ -116,9 +120,79 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         private void FormInDepDataTypeConsructor_Load(object sender, EventArgs e)
         {
-            grbNumberWholeParams.Visible = false;
-            rbtnRealSize4.Checked = true;
-            cbBooleanValue.SelectedIndex = 0;
+            if (dataType != null)
+            {
+                btnCreateScalar.Text = "Редактировать";
+                this.Text = "Редактирование типа";
+                groupBox1.Visible = false;
+                Type type = dataType.GetType();
+                if (type == typeof(Number))
+                {
+                    Number num = (Number)dataType;
+                    if (num.real)
+                    {
+                        rbtnRealNumber.Checked = true;
+                        if (num.Size == 4)
+                            rbtnRealSize4.Checked = true;
+                        else
+                            rbtnRealSize8.Checked = true;
+
+                    }
+                    else
+                    {
+                        if (num.signed)
+                            cbWholeSigned.Checked = true;
+                        if (num.Size == 1)
+                            rbtWholeSize1.Checked = true;
+                        if (num.Size == 2)
+                            rbtWholeSize2.Checked = true;
+                        if (num.Size == 4)
+                            rbtWholeSize4.Checked = true;
+                        if (num.Size == 8)
+                            rbtWholeSize8.Checked = true;
+
+                        else
+                            rbtnRealSize8.Checked = true;
+                        rbtnWholeNumber.Checked = true;
+                    }
+
+                    tbTypeName.Text = num.Name;
+                    tbTypeValue.Text = num.Value.ToString();
+
+
+                }
+                else
+                {
+                    grbNumberClass.Visible = false;
+                    grbNumberWholeParams.Visible = false;
+                    grbRealTypeParams.Visible = false;
+                }
+                if (type == typeof(Character))
+                {
+                    Character dt = (Character)dataType;
+                    rbtnScalarCharacter.Checked = true;
+                    tbTypeName.Text = dt.Name;
+                    tbTypeValue.Text = dt.Value.ToString();
+                }
+
+                if (type == typeof(Boolean))
+                {
+                    Boolean dt = (Boolean)dataType;
+                    tbTypeValue.Visible = false;
+                    rbtnScalarBoolean.Checked = true;
+                    cbBooleanValue.Visible = true;
+                    tbTypeName.Text = dt.Name;
+                    cbBooleanValue.SelectedIndex = dt.Value ? 0 : 1;
+                }
+
+
+            }
+            else
+            {
+                grbNumberWholeParams.Visible = false;
+                rbtnRealSize4.Checked = true;
+                cbBooleanValue.SelectedIndex = 0;
+            }
         }
 
         private void rbtnRealNumber_CheckedChanged(object sender, EventArgs e)

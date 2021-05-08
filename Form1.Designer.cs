@@ -144,6 +144,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.btnEditType.TabIndex = 6;
             this.btnEditType.Text = "Редактировать тип";
             this.btnEditType.UseVisualStyleBackColor = true;
+            this.btnEditType.Click += new System.EventHandler(this.btnEditType_Click);
             // 
             // btnDeleteType
             // 

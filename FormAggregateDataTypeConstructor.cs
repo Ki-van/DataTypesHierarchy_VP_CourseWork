@@ -12,8 +12,12 @@ namespace DataTypesHierarchy_VP_CourseWork
 {
     public partial class FormAggregateDataTypeConstructor : Form
     {
-        public FormAggregateDataTypeConstructor()
+        AggregateType aggregate= null;
+        public FormAggregateDataTypeConstructor(DataType dataType = null)
         {
+            if (dataType != null)
+                aggregate = (AggregateType)dataType;
+
             InitializeComponent();
         }
 
@@ -21,6 +25,16 @@ namespace DataTypesHierarchy_VP_CourseWork
         {
             foreach (var type in DataTypes.dataTypes)
                 listBoxAvailableComponents.Items.Add(type);
+            if (aggregate != null)
+            {
+                foreach (var type in aggregate.Components)
+                {
+                    listBoxIncludedComponents.Items.Add(type);
+                    listBoxAvailableComponents.Items.Remove(type);
+                }
+                tbTypeName.Text = aggregate.Name;
+            }
+
             listBoxAvailableComponents.DisplayMember = "Name";
 
             listBoxIncludedComponents.DisplayMember = "Name";

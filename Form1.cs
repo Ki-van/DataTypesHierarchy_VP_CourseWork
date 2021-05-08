@@ -28,9 +28,9 @@ namespace DataTypesHierarchy_VP_CourseWork
                 StartPosition = FormStartPosition.CenterParent
             };
             formDataTypeChooser.ShowDialog();
-            if(formDataTypeChooser.DialogResult == DialogResult.OK)
+            if (formDataTypeChooser.DialogResult == DialogResult.OK)
             {
-              BuildTreeView();
+                BuildTreeView();
             }
         }
 
@@ -43,7 +43,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             hierarchyTreeView.Nodes.Add(rootNode);
             TreeNode aggregatesNode = new TreeNode("Агрегатный");
             TreeNode scalarsNode = new TreeNode("Скалярный");
-            
+
             TreeNode depsNode = new TreeNode("Зависимый");
             TreeNode inDepsNode = new TreeNode("Независимый");
 
@@ -51,13 +51,13 @@ namespace DataTypesHierarchy_VP_CourseWork
             scalarsNode.Nodes.Add(depsNode);
             scalarsNode.Nodes.Add(inDepsNode);
 
-            foreach(DataType dataType in DataTypes.dataTypes)
+            foreach (DataType dataType in DataTypes.dataTypes)
             {
                 Type typeType = dataType.GetType();
-                if(typeType == typeof(DependentScalar))
+                if (typeType == typeof(DependentScalar))
                 {
                     AddTreeNode(dataType, depsNode);
-                } else if(typeType == typeof(AggregateType))
+                } else if (typeType == typeof(AggregateType))
                 {
                     AddTreeNode(dataType, aggregatesNode);
                 } else
@@ -72,7 +72,7 @@ namespace DataTypesHierarchy_VP_CourseWork
         private void AddTreeNode(DataType dataType, TreeNode rootNode)
         {
             Type typeType = dataType.GetType();
-            if(typeType == typeof(Number))
+            if (typeType == typeof(Number))
             {
                 Number element = (Number)dataType;
 
@@ -80,7 +80,7 @@ namespace DataTypesHierarchy_VP_CourseWork
                 newNode.Nodes.Add(new TreeNode(element.Value.ToString()));
                 newNode.Tag = dataType;
                 rootNode.Nodes.Add(newNode);
-            } else if(typeType == typeof(Character))
+            } else if (typeType == typeof(Character))
             {
                 Character element = (Character)dataType;
 
@@ -88,7 +88,7 @@ namespace DataTypesHierarchy_VP_CourseWork
                 newNode.Nodes.Add(new TreeNode(element.Value.ToString()));
                 newNode.Tag = dataType;
                 rootNode.Nodes.Add(newNode);
-            } else if(typeType == typeof(Boolean))
+            } else if (typeType == typeof(Boolean))
             {
                 Boolean element = (Boolean)dataType;
 
@@ -96,19 +96,19 @@ namespace DataTypesHierarchy_VP_CourseWork
                 newNode.Nodes.Add(new TreeNode(element.Value.ToString()));
                 newNode.Tag = dataType;
                 rootNode.Nodes.Add(newNode);
-            } else if(typeType == typeof(AggregateType))
+            } else if (typeType == typeof(AggregateType))
             {
                 AggregateType element = (AggregateType)dataType;
 
                 TreeNode newNode = new(element.Name);
                 newNode.Tag = dataType;
-                
-                foreach(DataType component in element.Components)
+
+                foreach (DataType component in element.Components)
                 {
                     AddTreeNode(component, newNode);
                 }
                 rootNode.Nodes.Add(newNode);
-            } else if(typeType == typeof(DependentScalar))
+            } else if (typeType == typeof(DependentScalar))
             {
                 DependentScalar element = (DependentScalar)dataType;
 
@@ -117,7 +117,7 @@ namespace DataTypesHierarchy_VP_CourseWork
                 AddTreeNode(element.Value, newNode);
                 rootNode.Nodes.Add(newNode);
             }
-        } 
+        }
 
         private void Form1_Shown(object sender, EventArgs e)
         {
@@ -135,7 +135,7 @@ namespace DataTypesHierarchy_VP_CourseWork
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                
+
                 try
                 {
                     Serialize.LoadFromXml(openFileDialog.FileName);
@@ -146,7 +146,7 @@ namespace DataTypesHierarchy_VP_CourseWork
                     _ = MessageBox.Show("Файл поврежден", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-           
+
         }
 
         private void MenuItemSave_Click(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace DataTypesHierarchy_VP_CourseWork
         }
 
         private void hierarchyTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-        {    
+        {
             tbTypeDescription.Text = ((DataType)(e.Node.Tag))?.GetDescription();
         }
 
@@ -169,6 +169,57 @@ namespace DataTypesHierarchy_VP_CourseWork
         {
             DataTypes.dataTypes.Remove((DataType)hierarchyTreeView.SelectedNode.Tag);
             BuildTreeView();
+        }
+
+        private void btnEditType_Click(object sender, EventArgs e)
+        {
+            Type type = hierarchyTreeView.SelectedNode.Tag.GetType();
+            if (type == typeof(Number) || type == typeof(Character) || type == typeof(Boolean))
+            {
+                FormInDepDataTypeConsructor formInDepDataTypeConsructor = new((DataType)hierarchyTreeView.SelectedNode.Tag)
+                {
+                    Owner = this,
+                    StartPosition = FormStartPosition.CenterParent
+                };
+                formInDepDataTypeConsructor.ShowDialog();
+                if (formInDepDataTypeConsructor.DialogResult == DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
+                    DataTypes.dataTypes.Remove((DataType)hierarchyTreeView.SelectedNode.Tag);
+                    BuildTreeView();
+                }
+            }
+            if(type == typeof(DependentScalar))
+            {
+                FormDepDataTypeConsructor formDepDataTypeConsructor = new()
+                {
+                    Owner = this,
+                    StartPosition = FormStartPosition.CenterParent
+                };
+                formDepDataTypeConsructor.ShowDialog();
+                if (formDepDataTypeConsructor.DialogResult == DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
+                    DataTypes.dataTypes.Remove((DataType)hierarchyTreeView.SelectedNode.Tag);
+                    BuildTreeView();
+                }
+            }
+
+            if(type == typeof(AggregateType))
+            {
+                FormAggregateDataTypeConstructor formAggregateDataTypeConstructor = new((DataType)hierarchyTreeView.SelectedNode.Tag)
+                {
+                    Owner = this,
+                    StartPosition = FormStartPosition.CenterParent
+                };
+                formAggregateDataTypeConstructor.ShowDialog();
+                if (formAggregateDataTypeConstructor.DialogResult == DialogResult.OK)
+                {
+                    DialogResult = DialogResult.OK;
+                    DataTypes.dataTypes.Remove((DataType)hierarchyTreeView.SelectedNode.Tag);
+                    BuildTreeView();
+                }
+            }
         }
     }
 }
