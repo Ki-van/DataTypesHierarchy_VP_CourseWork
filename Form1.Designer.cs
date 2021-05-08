@@ -29,15 +29,16 @@ namespace DataTypesHierarchy_VP_CourseWork
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Аггрегатный");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Зависимый");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Независимый");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Скалярный", new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Тип данных", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode9});
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Аггрегатный");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Зависимый");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Независимый");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Скалярный", new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Тип данных", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode4});
             this.hierarchyTreeView = new System.Windows.Forms.TreeView();
             this.btnAddDataType = new System.Windows.Forms.Button();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -48,28 +49,31 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.label1 = new System.Windows.Forms.Label();
             this.btnEditType = new System.Windows.Forms.Button();
             this.btnDeleteType = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // hierarchyTreeView
             // 
+            this.hierarchyTreeView.AllowDrop = true;
             this.hierarchyTreeView.BackColor = System.Drawing.SystemColors.Control;
             this.hierarchyTreeView.Location = new System.Drawing.Point(12, 45);
             this.hierarchyTreeView.Name = "hierarchyTreeView";
-            treeNode6.Name = "Aggregate";
-            treeNode6.Text = "Аггрегатный";
-            treeNode7.Name = "Dependent";
-            treeNode7.Text = "Зависимый";
-            treeNode8.Name = "Independent";
-            treeNode8.Text = "Независимый";
-            treeNode9.Name = "Scalar";
-            treeNode9.Text = "Скалярный";
-            treeNode10.Name = "RootDataType";
-            treeNode10.Text = "Тип данных";
+            treeNode1.Name = "Aggregate";
+            treeNode1.Text = "Аггрегатный";
+            treeNode2.Name = "Dependent";
+            treeNode2.Text = "Зависимый";
+            treeNode3.Name = "Independent";
+            treeNode3.Text = "Независимый";
+            treeNode4.Name = "Scalar";
+            treeNode4.Text = "Скалярный";
+            treeNode5.Name = "RootDataType";
+            treeNode5.Text = "Тип данных";
             this.hierarchyTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10});
+            treeNode5});
             this.hierarchyTreeView.Size = new System.Drawing.Size(429, 570);
             this.hierarchyTreeView.TabIndex = 0;
+            this.hierarchyTreeView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.hierarchyTreeView_ItemDrag);
             this.hierarchyTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.hierarchyTreeView_AfterSelect);
             // 
             // btnAddDataType
@@ -124,7 +128,7 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.tbTypeDescription.Multiline = true;
             this.tbTypeDescription.Name = "tbTypeDescription";
             this.tbTypeDescription.ReadOnly = true;
-            this.tbTypeDescription.Size = new System.Drawing.Size(399, 541);
+            this.tbTypeDescription.Size = new System.Drawing.Size(399, 446);
             this.tbTypeDescription.TabIndex = 4;
             // 
             // label1
@@ -191,6 +195,7 @@ namespace DataTypesHierarchy_VP_CourseWork
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnEditType;
         private System.Windows.Forms.Button btnDeleteType;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

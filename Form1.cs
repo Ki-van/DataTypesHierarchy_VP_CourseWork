@@ -18,6 +18,10 @@ namespace DataTypesHierarchy_VP_CourseWork
             toolStripMenuItemOpen.Click += new System.EventHandler(this.MenuItemOpen_Click);
             toolStripMenuItemSave.Click += new System.EventHandler(this.MenuItemSave_Click);
             BuildTreeView();
+
+            UserControlAggregateTypesCmp aggCmp = new UserControlAggregateTypesCmp();
+            aggCmp.Location = (new Point(460, 494));
+            this.Controls.Add(aggCmp);
         }
 
         private void btnAddDataType_Click(object sender, EventArgs e)
@@ -121,6 +125,7 @@ namespace DataTypesHierarchy_VP_CourseWork
 
         private void Form1_Shown(object sender, EventArgs e)
         {
+           
             hierarchyTreeView.ExpandAll();
         }
 
@@ -219,6 +224,14 @@ namespace DataTypesHierarchy_VP_CourseWork
                     DataTypes.dataTypes.Remove((DataType)hierarchyTreeView.SelectedNode.Tag);
                     BuildTreeView();
                 }
+            }
+        }
+
+        private void hierarchyTreeView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            if(((TreeNode)e.Item).Tag != null)
+            {
+                hierarchyTreeView.DoDragDrop(((TreeNode)e.Item).Tag, DragDropEffects.Copy);
             }
         }
     }
