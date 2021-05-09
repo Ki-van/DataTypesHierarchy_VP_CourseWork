@@ -12,14 +12,17 @@ namespace DataTypesHierarchy_VP_CourseWork
 {
     public partial class Form1 : Form
     {
+        UserControlAggregateTypesCmp aggCmp;
         public Form1()
         {
             InitializeComponent();
             toolStripMenuItemOpen.Click += new System.EventHandler(this.MenuItemOpen_Click);
             toolStripMenuItemSave.Click += new System.EventHandler(this.MenuItemSave_Click);
+            menuConvertLenght.Click += new EventHandler(this.MenuConvertLenght_Click);
+
             BuildTreeView();
 
-            UserControlAggregateTypesCmp aggCmp = new UserControlAggregateTypesCmp();
+            aggCmp = new UserControlAggregateTypesCmp();
             aggCmp.Location = (new Point(460, 494));
             this.Controls.Add(aggCmp);
         }
@@ -121,12 +124,23 @@ namespace DataTypesHierarchy_VP_CourseWork
                 AddTreeNode(element.Value, newNode);
                 rootNode.Nodes.Add(newNode);
             }
+
         }
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-           
+            toolTip1.SetToolTip(labelToolTip, "Элемент сравнивает два агрегатных объекта, для использования элемента перетащите на него из дерева агрегатные типы");
             hierarchyTreeView.ExpandAll();
+        }
+
+        private void MenuConvertLenght_Click(object sender, EventArgs e)
+        {
+            FormConverterLenght formConverterLenght = new FormConverterLenght()
+            {
+                Owner = this,
+                StartPosition = FormStartPosition.CenterParent
+            };
+            formConverterLenght.ShowDialog();
         }
 
         private void MenuItemOpen_Click(object sender, EventArgs e)

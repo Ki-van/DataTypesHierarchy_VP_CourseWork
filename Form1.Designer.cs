@@ -50,6 +50,8 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.btnEditType = new System.Windows.Forms.Button();
             this.btnDeleteType = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.labelToolTip = new System.Windows.Forms.Label();
+            this.menuConvertLenght = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +92,8 @@ namespace DataTypesHierarchy_VP_CourseWork
             // 
             this.menuStrip.BackColor = System.Drawing.SystemColors.MenuBar;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemFile});
+            this.toolStripMenuItemFile,
+            this.menuConvertLenght});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(872, 24);
@@ -160,11 +163,27 @@ namespace DataTypesHierarchy_VP_CourseWork
             this.btnDeleteType.UseVisualStyleBackColor = true;
             this.btnDeleteType.Click += new System.EventHandler(this.btnDeleteType_Click);
             // 
+            // labelToolTip
+            // 
+            this.labelToolTip.AutoSize = true;
+            this.labelToolTip.Location = new System.Drawing.Point(810, 528);
+            this.labelToolTip.Name = "labelToolTip";
+            this.labelToolTip.Size = new System.Drawing.Size(12, 15);
+            this.labelToolTip.TabIndex = 8;
+            this.labelToolTip.Text = "?";
+            // 
+            // menuConvertLenght
+            // 
+            this.menuConvertLenght.Name = "menuConvertLenght";
+            this.menuConvertLenght.Size = new System.Drawing.Size(64, 20);
+            this.menuConvertLenght.Text = "Задание";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(872, 627);
+            this.Controls.Add(this.labelToolTip);
             this.Controls.Add(this.btnDeleteType);
             this.Controls.Add(this.btnEditType);
             this.Controls.Add(this.label1);
@@ -196,6 +215,8 @@ namespace DataTypesHierarchy_VP_CourseWork
         private System.Windows.Forms.Button btnEditType;
         private System.Windows.Forms.Button btnDeleteType;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label labelToolTip;
+        private System.Windows.Forms.ToolStripMenuItem menuConvertLenght;
     }
 }
 
